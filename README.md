@@ -1,4 +1,4 @@
-# SENAC - TÉCNICO EM DESENVOLVIMENO DE SISTEMAS
+# SENAC - TÉCNICO EM DESENVOLVIMENTO DE SISTEMAS
 ## UC: Desenvolvimento Web
 Nesta unidade Vamos desenvolver o "Frontend" e "Backend" de uma aplicação web, para simular o ambiental real de trabalho.
 
