@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MeuCorre.Core.Enuns
+namespace MeuCorre.Domain.Enuns
 {
     public enum Tipotransacao
     {

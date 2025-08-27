@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MeuCorre.Infra.Context
+namespace MeuCorre.Infra.Data.Context
 {
     public class MeuDBBContext : DbContext
     {
