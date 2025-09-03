@@ -1,4 +1,4 @@
-﻿using MeuCorre.Core.Entities;
+﻿using MeuCorre.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
@@ -18,6 +18,7 @@ namespace MeuCorre.Infra.Data.Context
         }
 
         public DbSet<Usuario> Usuarios { get; set; }
+
         public DbSet<Categoria> Categorias { get; set; }
     }
 }
