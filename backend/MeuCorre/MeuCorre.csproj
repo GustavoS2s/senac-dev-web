@@ -17,4 +17,9 @@
     <Folder Include="Configurations\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MeuCoe.Infra\MeuCorre.Infra.csproj" />
+    <ProjectReference Include="..\MeuCorre.Application\MeuCorre.Application.csproj" />
+  </ItemGroup>
+
 </Project>
