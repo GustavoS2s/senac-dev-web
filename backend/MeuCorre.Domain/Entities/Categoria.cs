@@ -17,6 +17,7 @@ namespace MeuCorre.Domain.Entities
         public string Icone { get; private set; }
         public Guid? UsuarioId { get; private set; }
         public bool Ativo { get; private set; }
+        public Categoria() { }
 
         public virtual Usuario Usuario { get; private set; }
         public Categoria(string nome, string descricao, string cor, string icone, Guid usuarioid, bool ativo)
