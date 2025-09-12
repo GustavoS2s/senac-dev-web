@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using MeuCorre.Application.UseCases.Usuarios.Commands;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MeuCorre.Controllers
@@ -22,7 +21,16 @@ namespace MeuCorre.Controllers
             {
                 return Ok(new { mensagem });
             }
-            return new BadRequestObjectResult(mensagem);
+            else
+            {
+                return Conflict(mensagem);
+            }
+                
+        }
+
+        private IActionResult Conflict(string mensagem)
+        {
+            throw new NotImplementedException();
         }
 
         private IActionResult Ok(object value)
@@ -30,4 +38,5 @@ namespace MeuCorre.Controllers
             throw new NotImplementedException();
         }
     }
+
 }
