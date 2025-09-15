@@ -16,7 +16,7 @@ namespace MeuCorre.Controllers
         [HttpPost]
         public async Task<IActionResult> CriarUsuario([FromBody] CriarUsuarioCommand command)
         {
-           var (mensagem, sucesso) = await _mediator.Send(command);
+            var (mensagem, sucesso) = await _mediator.Send(command);
             if (sucesso)
             {
                 return Ok(new { mensagem });
@@ -25,7 +25,7 @@ namespace MeuCorre.Controllers
             {
                 return Conflict(mensagem);
             }
-                
+
         }
 
         private IActionResult Conflict(string mensagem)
@@ -37,6 +37,34 @@ namespace MeuCorre.Controllers
         {
             throw new NotImplementedException();
         }
-    }
+    
 
+        [HttpPut("{id}")]
+        public async Task<IActionResult> AtualizarUsuario(Guid id, [FromBody] AtualizarUsuarioCommand command)
+        {
+            if (id != command.Id)
+            {
+                return BadRequest("O ID do usuário na URL não corresponde ao ID no corpo da solicitação.");
+            }
+            var (mensagem, sucesso) = await _mediator.Send(command);
+            if (sucesso)
+            {
+                return Ok(new { mensagem });
+            }
+            else
+            {
+                return NotFound(mensagem);
+            }
+        }
+
+        private IActionResult NotFound(string mensagem)
+        {
+            throw new NotImplementedException();
+        }
+
+        private IActionResult BadRequest(string v)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

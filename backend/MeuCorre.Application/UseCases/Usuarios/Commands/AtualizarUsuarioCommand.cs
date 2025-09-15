@@ -1,54 +1,51 @@
-﻿using MediatR;
-using MeuCorre.Domain.Entities;
+﻿using System.ComponentModel.DataAnnotations;
+using MediatR;
 using MeuCorre.Domain.interfaces.Repositories;
-using System.ComponentModel.DataAnnotations;
+using MeuCorre.Domain.Interfaces.Repositories;
 
 namespace MeuCorre.Application.UseCases.Usuarios.Commands
 {
-    class AtualizarUsuarioCommand : IRequest<(string, bool)>
+    public class AtualizarUsuarioCommand : IRequest<(string, bool)>
     {
-        [Required(ErrorMessage = "Nome é obrigatório.")]
+        [Required(ErrorMessage = "É necessário informar o Id para atualizar os dados")]
+        public required Guid Id { get; set; }
+
+        [Required(ErrorMessage = "Nome é obrigatório")]
         public required string Nome { get; set; }
 
-        [Required(ErrorMessage = "Email é obrigatório.")]
+        [Required(ErrorMessage = "Email é obrigatório")]
         public required string Email { get; set; }
-        [Required(ErrorMessage = "Senha é obrigatória.")]
-        [MinLength(6, ErrorMessage = "Senha deve ter no mínimo 6 caracteres.")]
-        public required string Senha { get; set; }
-        public DateTime DataNascimento { get; set; }
 
+        [Required(ErrorMessage = "Data de Nascimento é obrigatória")]
+        public DateTime DataNascimento { get; set; }
     }
 
     internal class AtualizarUsuarioCommandHandler : IRequestHandler<AtualizarUsuarioCommand, (string, bool)>
     {
         private readonly IUsuarioRepository _usuarioRepository;
-
         public AtualizarUsuarioCommandHandler(IUsuarioRepository usuarioRepository)
         {
             _usuarioRepository = usuarioRepository;
         }
-        public async Task<(string, bool)> Handle(CriarUsuarioCommand request, CancellationToken cancellationToken)
+
+        public IUsuarioRepository Get_usuarioRepository()
         {
-            var usuarioExistente = await _usuarioRepository.ObterUsuarioPorEmail(request.Email);
-            if (usuarioExistente != null)
-            {
-                return ("Usuário com este email já existe.", false);
-            }
-
-            var novoUsuario = new Usuario(
-                 request.Nome,
-                 request.Email,
-                 request.Senha,
-                request.DataNascimento,
-                true);
-            await _usuarioRepository.AtualizarUsuarioAsync(novoUsuario);
-            return ("Usuário criado com sucesso.", true);
-
+            return _usuarioRepository;
         }
 
-        public Task<(string, bool)> Handle(AtualizarUsuarioCommand request, CancellationToken cancellationToken)
+        public async Task<(string, bool)> Handle(AtualizarUsuarioCommand request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var usuario = await _usuarioRepository.ObterUsuarioPorId(request.Id);
+            if (usuario == null)
+            {
+                return ("Usuário não encontrado.", false);
+            }
+
+
+            usuario.AtualizarInformacoes(request.Nome, request.DataNascimento);
+            await _usuarioRepository.AtualizarUsuarioAsync(usuario);
+
+            return ("Usuário atualizado com sucesso.", true);
         }
     }
 }
