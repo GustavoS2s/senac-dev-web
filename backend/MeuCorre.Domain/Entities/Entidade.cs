@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MeuCorre.Domain.Entities
+﻿namespace MeuCorre.Domain.Entities
 {
     public abstract class Entidade
     {
@@ -12,21 +6,23 @@ namespace MeuCorre.Domain.Entities
         public DateTime DataCriacao { get; private set; }
         public DateTime? DataAtualizacao { get; private set; }
 
+        //Construtur que cria uma nova entidade
         protected Entidade()
         {
             Id = Guid.NewGuid();
             DataCriacao = DateTime.Now;
         }
 
+        //Construtor que cria entidades que já existem
         protected Entidade(Guid id)
         {
             Id = id;
             DataAtualizacao = DateTime.Now;
         }
 
-        public void AtivarDataModificacao()
+        public void AtualizarDataModificacao()
         {
-             DataAtualizacao = DateTime.Now;
+            DataAtualizacao = DateTime.Now;
         }
-    }   
-} 
+    }
+}

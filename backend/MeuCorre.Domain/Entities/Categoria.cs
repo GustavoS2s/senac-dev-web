@@ -1,4 +1,5 @@
-﻿using MeuCorre.Core.Enuns;
+﻿
+using MeuCorre.Domain.Enuns;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,11 +12,14 @@ namespace MeuCorre.Domain.Entities
     {
         public string Nome { get; private set; }
         public string Descricao { get; private set; }
-        public Tipotransacao tipo  { get; private set; }
+        public Tipotransacao Tipo  { get; private set; }
         public string Cor { get; private set; }
         public string Icone { get; private set; }
         public Guid? UsuarioId { get; private set; }
         public bool Ativo { get; private set; }
+        public Categoria() { }
+
+        public virtual Usuario Usuario { get; private set; }
         public Categoria(string nome, string descricao, string cor, string icone, Guid usuarioid, bool ativo)
         {
             Nome = nome;
