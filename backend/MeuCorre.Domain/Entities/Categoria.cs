@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace MeuCorre.Domain.Entities
@@ -22,6 +23,7 @@ namespace MeuCorre.Domain.Entities
         public virtual Usuario Usuario { get; private set; }
         public Categoria(string nome,Tipotransacao tipo, bool ativo, string? descricao, string? cor, string? icone, Guid? usuarioid)
         {
+            ValidarEntidadeCategoria(cor);
             Nome = nome;
             Descricao = descricao;
             Cor = cor;
@@ -51,6 +53,21 @@ namespace MeuCorre.Domain.Entities
         {
             Ativo = false;
             AtualizarDataModificacao();
+        }
+
+        private void ValidarEntidadeCategoria(string cor)
+        {
+            if(string.IsNullOrEmpty(cor))
+            {
+                return;
+            }
+
+            var corRegex = new Regex(@"^#?([0-9a-fA-F]{3}){1,2}$");
+
+            if (!corRegex.IsMatch(cor))
+            {
+                throw new Exception("A cor deve estar no formato hexadecimal.");
+            }
         }
     }
 }

@@ -5,8 +5,8 @@ namespace MeuCorre.Domain.interfaces.Repositories
 {
     public interface ICategoriaRepository
     {
-        Task<Categoria>ObterPorIdAsync(Guid categoriaid);
-        Task<IEnumerable<Categoria>> ObterTodosAsync(Guid usuarioId);
+        Task<Categoria?>ObterPorIdAsync(Guid categoriaid);
+        Task<IEnumerable<Categoria>> ListarTodasPorUsuarioAsync(Guid usuarioId);
 
         Task<bool> ExisteAsync(Guid categoriaid);
         Task<bool> NomeExisteParaUsuarioAsync(string nome, Tipotransacao tipo, Guid usuarioId);
