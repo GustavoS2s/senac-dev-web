@@ -57,5 +57,9 @@ namespace MeuCorre.Infra.Repositories
             await _MeuDbcontext.SaveChangesAsync();
         }
 
+        public Task<bool> NomeExisteParaUsuarioAsync(string nome, Tipotransacao tipo, Guid? usuarioId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -9,7 +9,7 @@ namespace MeuCorre.Domain.interfaces.Repositories
         Task<IEnumerable<Categoria>> ListarTodasPorUsuarioAsync(Guid usuarioId);
 
         Task<bool> ExisteAsync(Guid categoriaid);
-        Task<bool> NomeExisteParaUsuarioAsync(string nome, Tipotransacao tipo, Guid usuarioId);
+        Task<bool> NomeExisteParaUsuarioAsync(string nome, Tipotransacao tipo, Guid? usuarioId);
         Task AdicionarAsync(Categoria categoria);
         Task AtualizarAsync(Categoria categoria);
         Task RemoverAsync(Categoria categoria);
