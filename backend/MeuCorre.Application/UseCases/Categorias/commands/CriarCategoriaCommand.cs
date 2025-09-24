@@ -31,10 +31,15 @@ namespace MeuCorre.Application.UseCases.Categorias.commands
         public CriarCategoriaCommandHandler(ICategoriaRepository categoriaRepository, IUsuarioRepository usuarioRepository)
         {
             _categoriaRepository = categoriaRepository;
+            _usuarioRepository = usuarioRepository;
         }
         public async Task<(string, bool)> Handle(CriarCategoriaCommand request, CancellationToken cancellationToken)
         {
-            var usuario = await _usuarioRepository.ObterPorIdAsync(request.UsuarioId);
+            var usuario = await _usuarioRepository.ObterUsuarioPorId(request.UsuarioId);
+            if (usuario == null)
+            {
+                return ("Usuário não encontrado.", false);
+            }
             var existe = await _categoriaRepository.NomeExisteParaUsuarioAsync(request.Nome, request.Tipo, request.UsuarioId);
             if(existe)
             {

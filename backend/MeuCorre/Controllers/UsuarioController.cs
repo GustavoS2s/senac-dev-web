@@ -6,7 +6,7 @@ namespace MeuCorre.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class UsuarioController
+    public class UsuarioController : ControllerBase
     {
         private readonly IMediator _mediator;
         public UsuarioController(IMediator mediator)
@@ -28,15 +28,6 @@ namespace MeuCorre.Controllers
 
         }
 
-        private IActionResult Conflict(string mensagem)
-        {
-            throw new NotImplementedException();
-        }
-
-        private IActionResult Ok(object value)
-        {
-            throw new NotImplementedException();
-        }
     
 
         [HttpPut("{id}")]
@@ -49,22 +40,12 @@ namespace MeuCorre.Controllers
             var (mensagem, sucesso) = await _mediator.Send(command);
             if (sucesso)
             {
-                return Ok(new { mensagem });
+                return Ok(mensagem);
             }
             else
             {
                 return NotFound(mensagem);
             }
-        }
-
-        private IActionResult NotFound(string mensagem)
-        {
-            throw new NotImplementedException();
-        }
-
-        private IActionResult BadRequest(string v)
-        {
-            throw new NotImplementedException();
         }
     }
 }

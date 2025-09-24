@@ -39,13 +39,13 @@ namespace MeuCorre.Application.UseCases.Categorias.commands
                 return ("Categoria não encontrada.", false);
             }
 
-            Guid? usuarioId = categoria.UsuarioId;
-            var categoriaEstaDuplicada = await _categoriaRepository.NomeExisteParaUsuarioAsync(request.Nome, request.Tipo, categoria.UsuarioId);
+            Guid? usuarioId = categoria.UsuarioId; // Corrected property name to 'UsuarioId'
+            var categoriaEstaDuplicada = await _categoriaRepository.NomeExisteParaUsuarioAsync(request.Nome, request.Tipo, usuarioId.GetValueOrDefault());
             if (categoriaEstaDuplicada)
             {
                 return ("Já existe uma categoria com esse nome para o mesmo tipo.", false);
             }
-            categoria.AtualizarInformacoes(request.Nome, request.Tipo,request.Descricao, request.Cor, request.Icone);
+            categoria.AtualizarInformacoes(request.Nome, request.Tipo, request.Descricao, request.Cor, request.Icone);
             await _categoriaRepository.AtualizarAsync(categoria);
             return ("Categoria atualizada com sucesso.", true);
         }
