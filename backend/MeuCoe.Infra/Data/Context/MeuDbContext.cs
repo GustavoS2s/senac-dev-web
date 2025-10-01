@@ -14,11 +14,13 @@ namespace MeuCorre.Infra.Data.Context
 
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Categoria> Categorias { get; set; }
+        public DbSet<Conta> Contas { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(MeuDbContext).Assembly);
             base.OnModelCreating(modelBuilder);
         }
+
     }
 }
