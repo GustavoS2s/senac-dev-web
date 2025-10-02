@@ -20,5 +20,7 @@ namespace MeuCorre.Domain.Interfaces
         Task<decimal> CalcularSaldoTotalAsync(Guid usuarioId);
         Task SalvarAsync();
         Task AdicionarAsync(Conta conta);
+        Task Atualizar(Conta conta);
+        Task Excluir(Conta conta);
     }
 }

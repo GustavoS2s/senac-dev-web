@@ -81,5 +81,17 @@ namespace MeuCorre.Infrastructure.Repositories
                await _meuDbContext.SaveChangesAsync();
             }
 
+            public async Task Atualizar(Conta entity)
+            {
+                _meuDbContext.Contas.Update(entity);
+            await Task.CompletedTask;
+            }
+            
+            public async Task Excluir(Conta entity)
+            {
+            _meuDbContext.Contas.Remove(entity);
+            await Task.CompletedTask;
+            }
+
     }
 }
