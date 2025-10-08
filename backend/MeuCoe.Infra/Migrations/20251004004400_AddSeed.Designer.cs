@@ -4,6 +4,7 @@ using MeuCorre.Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MeuCorre.Infra.Migrations
 {
     [DbContext(typeof(MeuDbContext))]
-    partial class MeuDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251004004400_AddSeed")]
+    partial class AddSeed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -65,6 +68,80 @@ namespace MeuCorre.Infra.Migrations
                     b.HasIndex("UsuarioId");
 
                     b.ToTable("Categorias", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("9f1e2d3c-4b5a-6c7d-8e9f-0a1b2c3d4e5f"),
+                            Ativo = true,
+                            DataCriacao = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Nome = "Moradia",
+                            Tipo = 1,
+                            UsuarioId = new Guid("d290f1ee-6c54-4b01-90e6-d701748f0851")
+                        },
+                        new
+                        {
+                            Id = new Guid("a1b2c3d4-e5f6-47a8-9b0c-1d2e3f4a5b6c"),
+                            Ativo = true,
+                            DataCriacao = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Nome = "Alimentação",
+                            Tipo = 2,
+                            UsuarioId = new Guid("d290f1ee-6c54-4b01-90e6-d701748f0851")
+                        },
+                        new
+                        {
+                            Id = new Guid("b7c6d5e4-f3a2-41b0-9c8d-7e6f5a4b3c2d"),
+                            Ativo = true,
+                            DataCriacao = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Nome = "Saúde",
+                            Tipo = 2,
+                            UsuarioId = new Guid("d290f1ee-6c54-4b01-90e6-d701748f0851")
+                        },
+                        new
+                        {
+                            Id = new Guid("c0d1e2f3-0415-4a6b-8c7d-9e8f7a6b5c4d"),
+                            Ativo = true,
+                            DataCriacao = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Nome = "Transporte",
+                            Tipo = 2,
+                            UsuarioId = new Guid("d290f1ee-6c54-4b01-90e6-d701748f0851")
+                        },
+                        new
+                        {
+                            Id = new Guid("d4e5f6a7-b8c9-40d1-8e2f-3a4b5c6d7e8f"),
+                            Ativo = true,
+                            DataCriacao = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Nome = "Lazer",
+                            Tipo = 2,
+                            UsuarioId = new Guid("d290f1ee-6c54-4b01-90e6-d701748f0851")
+                        },
+                        new
+                        {
+                            Id = new Guid("e6f7a8b9-c0d1-4e2f-9a3b-5c6d7e8f9a0b"),
+                            Ativo = true,
+                            DataCriacao = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Nome = "Salário",
+                            Tipo = 1,
+                            UsuarioId = new Guid("d290f1ee-6c54-4b01-90e6-d701748f0851")
+                        },
+                        new
+                        {
+                            Id = new Guid("f1a2b3c4-d5e6-4789-8b0c-2d3e4f5a6b7c"),
+                            Ativo = true,
+                            DataCriacao = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Nome = "Outras",
+                            Tipo = 1,
+                            UsuarioId = new Guid("d290f1ee-6c54-4b01-90e6-d701748f0851")
+                        },
+                        new
+                        {
+                            Id = new Guid("0a1b2c3d-4e5f-4678-9a0b-1c2d3e4f5a6b"),
+                            Ativo = true,
+                            DataCriacao = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Nome = "Investimentos",
+                            Tipo = 1,
+                            UsuarioId = new Guid("d290f1ee-6c54-4b01-90e6-d701748f0851")
+                        });
                 });
 
             modelBuilder.Entity("MeuCorre.Domain.Entities.Conta", b =>
@@ -128,6 +205,18 @@ namespace MeuCorre.Infra.Migrations
                         .IsUnique();
 
                     b.ToTable("Contas", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("a3c1e2f3-4567-4890-8b1c-2d3e4f5a6b7c"),
+                            Ativo = true,
+                            DataCriacao = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Nome = "Carteira para o usuário",
+                            Saldo = 0.00m,
+                            Tipo = 1,
+                            UsuarioId = new Guid("d290f1ee-6c54-4b01-90e6-d701748f0851")
+                        });
                 });
 
             modelBuilder.Entity("MeuCorre.Domain.Entities.Usuario", b =>
@@ -168,6 +257,18 @@ namespace MeuCorre.Infra.Migrations
                         .IsUnique();
 
                     b.ToTable("Usuarios", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("d290f1ee-6c54-4b01-90e6-d701748f0851"),
+                            Ativo = true,
+                            DataCriacao = new DateTime(2025, 1, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DataNascimento = new DateTime(2007, 6, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "gustavoalves@gmail.com",
+                            Nome = "Gustavo Alves",
+                            Senha = "123456"
+                        });
                 });
 
             modelBuilder.Entity("MeuCorre.Domain.Entities.Categoria", b =>

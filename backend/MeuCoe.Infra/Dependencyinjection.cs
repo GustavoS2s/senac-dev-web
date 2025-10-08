@@ -1,6 +1,8 @@
-﻿using MeuCorre.Domain.Interfaces.Repositories;
+﻿using MeuCorre.Domain.Interfaces;
+using MeuCorre.Domain.Interfaces.Repositories;
 using MeuCorre.Infra.Data.Context;
 using MeuCorre.Infra.Repositories;
+using MeuCorre.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,15 +14,18 @@ namespace MeuCorre.Infra
         public static IServiceCollection AddInfrastructure(
             this IServiceCollection services, IConfiguration configuration)
         {
-            //Busca a string de conexão no arquivo appsettings.json
+            // Busca a string de conexão no arquivo appsettings.json
             var connectionString = configuration.GetConnectionString("Mysql");
 
-            //Registra o MeuDbContext e configura o uso do MySQL
+            // Registra o MeuDbContext e configura o uso do MySQL
             services.AddDbContext<MeuDbContext>(options =>
                 options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
-            //Registra os repositorios para eles funcionarem com injeção de dependência
+            // Registra os repositorios para eles funcionarem com injeção de dependência
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+
+    
+            services.AddScoped<IContaRepository, ContaRepository>();
 
             return services;
         }
