@@ -1,0 +1,70 @@
+<div class="card">
+    <div class="card-body">
+        <div class="d-flex">
+            <h5 class="card-title">Categorias</h5>
+            <button class="btn btn-sm btn-primary ms-auto">
+                <i class="ri-add-line me-1"></i> Nova Categoria
+            </button>
+        </div>
+        
+        <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
+            <li [ngbNavItem]="1">
+                <button ngbNavLink>Receitas</button>
+                
+                <ng-template ngbNavContent>
+                    <ul class="list-group list-group-flush mt-3">
+                        
+                        <li class="list-group-item d-flex justify-content-between align-items-center py-2">
+                            <div class="d-flex align-items-center">
+                                <i class="ri-exchange-funds-fill text-success me-2 fs-5"></i> 
+                                Empréstimos
+                            </div>
+                            <div>
+                                <a href="#" class="text-secondary text-decoration-none me-2 small">arquivar</a>
+                                <a href="#" class="text-primary text-decoration-none small">+ sub-categoria</a>
+                            </div>
+                        </li>
+
+                        <li class="list-group-item d-flex justify-content-between align-items-center py-2">
+                            <div class="d-flex align-items-center">
+                                <i class="ri-trending-up-fill text-success me-2 fs-5"></i> 
+                                Investimentos
+                            </div>
+                            <div>
+                                <a href="#" class="text-secondary text-decoration-none me-2 small">arquivar</a>
+                                <a href="#" class="text-primary text-decoration-none small">+ sub-categoria</a>
+                            </div>
+                        </li>
+                        
+                        <li class="list-group-item d-flex justify-content-between align-items-center py-2">
+                            <div class="d-flex align-items-center">
+                                <i class="ri-star-fill text-success me-2 fs-5"></i> 
+                                Salário
+                            </div>
+                            <div>
+                                <a href="#" class="text-secondary text-decoration-none me-2 small">arquivar</a>
+                                <a href="#" class="text-primary text-decoration-none small">+ sub-categoria</a>
+                            </div>
+                        </li>
+                    </ul>
+                </ng-template>
+            </li>
+            
+            <li [ngbNavItem]="2">
+                <button ngbNavLink>Despesas</button>
+                
+                <ng-template ngbNavContent>
+                    <ul class="list-group list-group-flush mt-3">
+                        <li class="list-group-item py-2">
+                             <p class="mb-0 text-muted">Nenhuma despesa cadastrada ainda.</p>
+                        </li>
+                    </ul>
+                </ng-template>
+            </li>
+        </ul>
+
+        <div [ngbNavOutlet]="nav" class="mt-2"></div>
+
+        <pre>Active: {{ active }}</pre>
+    </div>
+</div>
