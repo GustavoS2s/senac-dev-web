@@ -1,100 +1,70 @@
-﻿using System;
-using MeuCorre.Domain.Enuns;
+﻿using MeuCorre.Domain.Enums;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace MeuCorre.Domain.Entities
 {
     public class Conta : Entidade
     {
-        public string Nome { get; private set; }
-        public TipoConta Tipo { get; private set; }
-        public decimal Saldo { get; private set; } = 0;
-        public Guid UsuarioId { get; private set; }
-        public bool Ativo { get; private set; } = true;
+        public required string Nome { get; set; }
+        public required TipoConta Tipo { get; set; }
+        public required decimal Saldo { get; set; }
+        public required Guid UsuarioId { get; set; }
+        public required bool Ativo { get; set; }
+        public TipoLimite? Limite { get; set; }
+        public DateTime? DiaFechamento { get; set; }
+        public DateTime? DiaVencimento { get; set; }
+        public string? Cor { get; set; }
+        public string? Icone { get; set; }
+        public decimal? LimiteValor { get; set; } 
 
-        public decimal? Limite { get; private set; }
-        public int? DiaFechamento { get; private set; }
-        public int? DiaVencimento { get; private set; }
-        public TipoLimite? TipoLimite { get; private set; }
-        public string? Cor { get; private set; }
-        public string? Icone { get; private set; }
-        public DateTime? DataAtualizacao { get; private set; }
+        public virtual Usuario Usuario { get; private set; }
 
-        public Usuario Usuario { get; private set; }
-
-        protected Conta() { }
-
-        public Conta(string nome, TipoConta tipo, decimal saldo, Guid usuarioId, decimal? limite = null,
-                     int? diaFechamento = null, int? diaVencimento = null,
-                     TipoLimite? tipoLimite = null, string? cor = null, string? icone = null)
+        public string EhCartaoCredito()
         {
-            this.Nome = nome;
-            this.Tipo = tipo;
-            this.Saldo = saldo;
-            this.UsuarioId = usuarioId;
-            this.Limite = limite;
-            this.DiaFechamento = diaFechamento;
-            this.DiaVencimento = diaVencimento;
-            this.TipoLimite = tipoLimite;
-            this.Cor = cor;
-            this.Icone = icone;
-            this.Ativo = true;
-        }
-
-        public bool EhCartaoCredito()
-        {
-            return Tipo == TipoConta.CartaoCredito;
-        }
-
-        public bool EhCarteira()
-        {
-            return Tipo == TipoConta.Carteira;
-        }
-
-        public decimal CalcularLimiteDisponivel()
-        {
-            if (!EhCartaoCredito() || !Limite.HasValue)
+            if(Tipo == TipoConta.CartaoCredito)
             {
-                return 0.00m;
-            }
-            return Limite.Value - Math.Abs(Saldo);
-        }
-
-        public bool PodeFazerDebito(decimal valor)
-        {
-            if (valor <= 0) return false;
-
-            if (EhCartaoCredito())
-            {
-                return CalcularLimiteDisponivel() >= valor;
+                return "É cartão de crédito";
             }
             else
             {
-                return (Saldo - valor) >= 0;
+                return "Não é cartão de crédito";
             }
         }
 
-        public void AtualizarDados(string nome, int? diaFechamento, int? diaVencimento, string? cor, string? icone, decimal? limite, TipoLimite? tipoLimite)
+        public string EhCarteira()
         {
-            this.Nome = nome;
-            this.DiaFechamento = diaFechamento;
-            this.DiaVencimento = diaVencimento;
-            this.Cor = cor;
-            this.Icone = icone;
-            this.Limite = limite;
-            this.TipoLimite = tipoLimite;
-            this.DataAtualizacao = DateTime.UtcNow;
+            if (Tipo == TipoConta.Carteira)
+            {
+                return "É carteira";
+            }
+            else
+            {
+                return "Não é carteira";
+            }
         }
 
-        public void Inativar()
+        public decimal CalcularLimiteDisponivel(decimal limite)
         {
-            this.Ativo = false;
-            this.DataAtualizacao = DateTime.UtcNow;
+            var limiteDisponivel = (limite - Saldo);
+            return limiteDisponivel;
         }
 
-        public void Reativar()
+        public string PodeFazerDebito(decimal valor, decimal saldo)
         {
-            this.Ativo = true;
-            this.DataAtualizacao = DateTime.UtcNow;
+            if(saldo >= valor)
+            {
+                return "Pode fazer o débito";
+            }
+            else
+            {
+                return "Não tem o saldo necessário";
+            }
         }
     }
 }

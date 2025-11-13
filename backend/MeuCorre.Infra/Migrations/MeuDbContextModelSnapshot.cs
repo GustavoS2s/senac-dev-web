@@ -32,8 +32,8 @@ namespace MeuCorre.Infra.Migrations
                         .HasColumnType("tinyint(1)");
 
                     b.Property<string>("Cor")
-                        .HasMaxLength(50)
-                        .HasColumnType("varchar(50)");
+                        .HasMaxLength(10)
+                        .HasColumnType("varchar(10)");
 
                     b.Property<DateTime?>("DataAtualizacao")
                         .HasColumnType("datetime(6)");
@@ -42,75 +42,19 @@ namespace MeuCorre.Infra.Migrations
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("Descricao")
-                        .HasMaxLength(200)
-                        .HasColumnType("varchar(200)");
+                        .HasMaxLength(255)
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("Icone")
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
+                        .HasMaxLength(10)
+                        .HasColumnType("varchar(10)");
 
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("varchar(100)");
 
-                    b.Property<int>("Tipo")
-                        .HasColumnType("int");
-
-                    b.Property<Guid?>("UsuarioId")
-                        .HasColumnType("char(36)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UsuarioId");
-
-                    b.ToTable("Categorias", (string)null);
-                });
-
-            modelBuilder.Entity("MeuCorre.Domain.Entities.Conta", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
-
-                    b.Property<bool>("Ativo")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<string>("Cor")
-                        .HasMaxLength(7)
-                        .HasColumnType("varchar(7)");
-
-                    b.Property<DateTime?>("DataAtualizacao")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<DateTime>("DataCriacao")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<int?>("DiaFechamento")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("DiaVencimento")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Icone")
-                        .HasMaxLength(20)
-                        .HasColumnType("varchar(20)");
-
-                    b.Property<decimal?>("Limite")
-                        .HasColumnType("decimal(10,2)");
-
-                    b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("varchar(50)");
-
-                    b.Property<decimal>("Saldo")
-                        .HasColumnType("decimal(10,2)");
-
-                    b.Property<int>("Tipo")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("TipoLimite")
+                    b.Property<int>("TipoDaTransacao")
                         .HasColumnType("int");
 
                     b.Property<Guid>("UsuarioId")
@@ -118,16 +62,107 @@ namespace MeuCorre.Infra.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Ativo");
-
-                    b.HasIndex("Tipo");
-
                     b.HasIndex("UsuarioId");
 
-                    b.HasIndex("UsuarioId", "Nome")
-                        .IsUnique();
+                    b.ToTable("Categorias", (string)null);
 
-                    b.ToTable("Contas", (string)null);
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("9f1e2d3c-4b5a-6c7d-8e9f-0a1b2c3d4e5f"),
+                            Ativo = true,
+                            Cor = "#BEE3F8",
+                            DataCriacao = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Descricao = "Despesas relacionadas à casa e moradia (aluguel, condomínio, contas)",
+                            Icone = "🏠",
+                            Nome = "Moradia",
+                            TipoDaTransacao = 2,
+                            UsuarioId = new Guid("da3b9f4c-8e6a-4a4f-9e6b-1c2d3e4f5a6b")
+                        },
+                        new
+                        {
+                            Id = new Guid("a1b2c3d4-e5f6-47a8-9b0c-1d2e3f4a5b6c"),
+                            Ativo = true,
+                            Cor = "#DFF7E0",
+                            DataCriacao = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Descricao = "Gastos com alimentação (supermercado, restaurantes)",
+                            Icone = "🍔",
+                            Nome = "Alimentação",
+                            TipoDaTransacao = 2,
+                            UsuarioId = new Guid("da3b9f4c-8e6a-4a4f-9e6b-1c2d3e4f5a6b")
+                        },
+                        new
+                        {
+                            Id = new Guid("b7c6d5e4-f3a2-41b0-9c8d-7e6f5a4b3c2d"),
+                            Ativo = true,
+                            Cor = "#FFD1D1",
+                            DataCriacao = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Descricao = "Despesas médicas e de saúde (consultas, medicamentos)",
+                            Icone = "💊",
+                            Nome = "Saúde",
+                            TipoDaTransacao = 2,
+                            UsuarioId = new Guid("da3b9f4c-8e6a-4a4f-9e6b-1c2d3e4f5a6b")
+                        },
+                        new
+                        {
+                            Id = new Guid("c0d1e2f3-0415-4a6b-8c7d-9e8f7a6b5c4d"),
+                            Ativo = true,
+                            Cor = "#FFF5BA",
+                            DataCriacao = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Descricao = "Gastos com transporte (combustível, ônibus, manutenção)",
+                            Icone = "🚗",
+                            Nome = "Transporte",
+                            TipoDaTransacao = 2,
+                            UsuarioId = new Guid("da3b9f4c-8e6a-4a4f-9e6b-1c2d3e4f5a6b")
+                        },
+                        new
+                        {
+                            Id = new Guid("d4e5f6a7-b8c9-40d1-8e2f-3a4b5c6d7e8f"),
+                            Ativo = true,
+                            Cor = "#E8D8FF",
+                            DataCriacao = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Descricao = "Despesas com lazer e entretenimento (cinema, viagens)",
+                            Icone = "🎮",
+                            Nome = "Lazer",
+                            TipoDaTransacao = 2,
+                            UsuarioId = new Guid("da3b9f4c-8e6a-4a4f-9e6b-1c2d3e4f5a6b")
+                        },
+                        new
+                        {
+                            Id = new Guid("e6f7a8b9-c0d1-4e2f-9a3b-5c6d7e8f9a0b"),
+                            Ativo = true,
+                            Cor = "#D1F7FF",
+                            DataCriacao = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Descricao = "Rendimento principal do trabalho (salário)",
+                            Icone = "💼",
+                            Nome = "Salário",
+                            TipoDaTransacao = 1,
+                            UsuarioId = new Guid("da3b9f4c-8e6a-4a4f-9e6b-1c2d3e4f5a6b")
+                        },
+                        new
+                        {
+                            Id = new Guid("f1a2b3c4-d5e6-4789-8b0c-2d3e4f5a6b7c"),
+                            Ativo = true,
+                            Cor = "#F0F0F0",
+                            DataCriacao = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Descricao = "Outras receitas diversas não classificadas",
+                            Icone = "📦",
+                            Nome = "Outras",
+                            TipoDaTransacao = 1,
+                            UsuarioId = new Guid("da3b9f4c-8e6a-4a4f-9e6b-1c2d3e4f5a6b")
+                        },
+                        new
+                        {
+                            Id = new Guid("0a1b2c3d-4e5f-4678-9a0b-1c2d3e4f5a6b"),
+                            Ativo = true,
+                            Cor = "#E6F8E6",
+                            DataCriacao = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Descricao = "Aplicações financeiras e rendimentos (ações, fundos)",
+                            Icone = "📈",
+                            Nome = "Investimentos",
+                            TipoDaTransacao = 1,
+                            UsuarioId = new Guid("da3b9f4c-8e6a-4a4f-9e6b-1c2d3e4f5a6b")
+                        });
                 });
 
             modelBuilder.Entity("MeuCorre.Domain.Entities.Usuario", b =>
@@ -150,8 +185,8 @@ namespace MeuCorre.Infra.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
+                        .HasMaxLength(255)
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("Nome")
                         .IsRequired()
@@ -168,6 +203,18 @@ namespace MeuCorre.Infra.Migrations
                         .IsUnique();
 
                     b.ToTable("Usuarios", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("da3b9f4c-8e6a-4a4f-9e6b-1c2d3e4f5a6b"),
+                            Ativo = true,
+                            DataCriacao = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DataNascimento = new DateTime(1985, 7, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "weltoncastoldi@hotmail.com",
+                            Nome = "Welton Castoldi",
+                            Senha = "123456"
+                        });
                 });
 
             modelBuilder.Entity("MeuCorre.Domain.Entities.Categoria", b =>
@@ -175,17 +222,7 @@ namespace MeuCorre.Infra.Migrations
                     b.HasOne("MeuCorre.Domain.Entities.Usuario", "Usuario")
                         .WithMany("Categorias")
                         .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.Navigation("Usuario");
-                });
-
-            modelBuilder.Entity("MeuCorre.Domain.Entities.Conta", b =>
-                {
-                    b.HasOne("MeuCorre.Domain.Entities.Usuario", "Usuario")
-                        .WithMany()
-                        .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Usuario");

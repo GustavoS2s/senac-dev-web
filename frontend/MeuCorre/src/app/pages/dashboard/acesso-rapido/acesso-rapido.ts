@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-acesso-rapidas',
+  selector: 'app-acesso-rapido',
   imports: [],
   templateUrl: './acesso-rapido.html',
   styleUrl: './acesso-rapido.css',
@@ -9,4 +9,3 @@ import { Component } from '@angular/core';
 export class AcessoRapido {
 
 }
-

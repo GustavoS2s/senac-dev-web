@@ -7,7 +7,7 @@
         public DateTime? DataAtualizacao { get; private set; }
 
         //Construtur que cria uma nova entidade
-        protected Entidade()
+        protected Entidade() 
         {
             Id = Guid.NewGuid();
             DataCriacao = DateTime.Now;
@@ -20,7 +20,7 @@
             DataAtualizacao = DateTime.Now;
         }
 
-        public void AtualizarDataModificacao()
+        public void AtualizarDataMoficacao()
         {
             DataAtualizacao = DateTime.Now;
         }

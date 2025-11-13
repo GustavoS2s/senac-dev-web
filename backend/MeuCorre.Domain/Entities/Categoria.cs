@@ -1,71 +1,70 @@
-﻿
-using MeuCorre.Domain.Enuns;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+﻿using System.Text.RegularExpressions;
+using MeuCorre.Domain.Enums;
 
 namespace MeuCorre.Domain.Entities
 {
     public class Categoria : Entidade
     {
+        public Guid UsuarioId { get; private set; }
         public string Nome { get; private set; }
-        public string? Descricao { get; private set; }
-        public Tipotransacao Tipo  { get; private set; }
+        public string? Descricao  { get; private set; }
         public string? Cor { get; private set; }
         public string? Icone { get; private set; }
-        public Guid? UsuarioId { get; private set; }
+        public TipoTransacao TipoDaTransacao { get; private set; }
         public bool Ativo { get; private set; }
-        public Categoria() { }
 
+        // Propriedade de navegação para a entidade Usuario pois
+        // o usuário pode ter várias categorias
         public virtual Usuario Usuario { get; private set; }
-        public Categoria(string nome,Tipotransacao tipo, string? descricao, string? cor, string? icone, Guid? usuarioid)
+
+        public Categoria(Guid usuarioId, string nome, TipoTransacao tipoDaTransacao, string? descricao, string? cor, string? icone)
         {
             ValidarEntidadeCategoria(cor);
-            Nome = nome;
+
+            UsuarioId = usuarioId;
+            Nome = nome.ToUpper();
             Descricao = descricao;
             Cor = cor;
             Icone = icone;
-            UsuarioId = usuarioid;
+            TipoDaTransacao = tipoDaTransacao;
             Ativo = true;
-            Tipo = tipo;
         }
 
-        public void AtualizarInformacoes(string nome,Tipotransacao tipo, string? descricao, string? cor, string? icone)
+        public void AtualizarInformacoes(string nome, TipoTransacao tipoDaTransacao,
+                                         string descricao, string cor, string icone)
         {
             Nome = nome.ToUpper();
             Descricao = descricao;
             Cor = cor;
             Icone = icone;
-            Tipo = tipo;
-            AtualizarDataModificacao();
+            TipoDaTransacao = tipoDaTransacao;
+            AtualizarDataMoficacao();
         }
+
         public void Ativar()
         {
             Ativo = true;
-            AtualizarDataModificacao();
+            AtualizarDataMoficacao();
         }
-
         public void Inativar()
         {
             Ativo = false;
-            AtualizarDataModificacao();
+            AtualizarDataMoficacao();
         }
 
         private void ValidarEntidadeCategoria(string cor)
         {
-            if(string.IsNullOrEmpty(cor))
+            if (string.IsNullOrEmpty(cor))
             {
-                return;
+                return; //retorna caso a cor seja nula ou vazia
             }
 
+            //#FF02AB
             var corRegex = new Regex(@"^#?([0-9a-fA-F]{3}){1,2}$");
 
             if (!corRegex.IsMatch(cor))
             {
-                throw new Exception("A cor deve estar no formato hexadecimal.");
+                throw new Exception("A cor deve estar no formato hexadecimal");
             }
         }
     }

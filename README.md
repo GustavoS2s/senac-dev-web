@@ -1,9 +1,10 @@
-# SENAC - TÉCNICO EM DESENVOLVIMENTO DE SISTEMAS
+# SENAC - TÉCNICO DE DESENVOLVIMENTO DE SISTEMAS
 ## UC: Desenvolvimento Web
-Nesta unidade Vamos desenvolver o "Frontend" e "Backend" de uma aplicação web, para simular o ambiental real de trabalho.
+
+Nesta unidade vamos desenvolver o FrontEnd e BackEnd de um aplicativo web, para simular o ambiente real de trabalho.
 
 ## Backend
-O Backend será desenvolvido em .netB modeo de Web API Rest.
+O Backend será desenvolvido em .net modelo de web API Rest.
 
 ## Frontend
-Para o frontend vamos usar técnologias como Html, Css, jS e Typescript com Angular.
+Para o Frontend vamos usar tecnologias como HTML, CSS, JS e Typescript com Angular.

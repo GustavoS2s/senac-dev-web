@@ -20,7 +20,7 @@ namespace MeuCorre.Domain.Entities
         public Usuario(string nome, string email, string senha, DateTime dataNascimento, bool ativo)
         {
             ValidarEntidadeUsuario(email, senha, dataNascimento);
-
+            
             Nome = nome;
             Email = email;
             Senha = senha;
@@ -28,22 +28,25 @@ namespace MeuCorre.Domain.Entities
             Ativo = ativo;
         }
 
-        public void AtualizarInformacoes(string nome, DateTime datanascimento)
+        public void AtualizarInformacoes(string nome, DateTime dataNascimento)
         {
-            ValidarIdadeMinina(datanascimento);
+            ValidarIdadeMinina(dataNascimento);
             Nome = nome;
-            DataNascimento = datanascimento;
-            AtualizarDataModificacao();
+            DataNascimento = dataNascimento;
+            AtualizarDataMoficacao();
         }
         public void AtivarUsuario()
         {
             Ativo = true;
-            AtualizarDataModificacao();
+            AtualizarDataMoficacao();
         }
         public void InativarUsuario()
         {
             Ativo = false;
+            AtualizarDataMoficacao();
         }
+
+
 
         private void ValidarEntidadeUsuario(string email, string senha, DateTime nascimento)
         {
@@ -76,7 +79,7 @@ namespace MeuCorre.Domain.Entities
             {
                 throw new Exception("A senha deve contar pelo menos uma letra maiuscula");
             }
-            if (!Regex.IsMatch(senha, "[0-9]"))
+            if (!Regex.IsMatch(senha,"[0-9]"))
             {
                 throw new Exception("A senha deve contar pelo menos um números");
             }
@@ -89,6 +92,5 @@ namespace MeuCorre.Domain.Entities
                 throw new Exception("Email em formato inválido");
             }
         }
-
     }
 }

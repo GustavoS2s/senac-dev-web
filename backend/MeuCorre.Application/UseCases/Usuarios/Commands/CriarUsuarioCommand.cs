@@ -25,7 +25,7 @@ namespace MeuCorre.Application.UseCases.Usuarios.Commands
         public DateTime DataNascimento { get; set; }
     }
 
-    internal class CriarUsuarioCommandHandler : IRequestHandler<CriarUsuarioCommand, (string, bool)>
+    internal class CriarUsuarioCommandHandler : IRequestHandler<CriarUsuarioCommand, (string,bool)>
     {
         private readonly IUsuarioRepository _usuarioRepository;
 
@@ -44,10 +44,10 @@ namespace MeuCorre.Application.UseCases.Usuarios.Commands
             }
 
             var novoUsuario = new Usuario(
-                request.Nome,
-                request.Email,
-                request.Senha,
-                request.DataNascimento,
+                request.Nome, 
+                request.Email, 
+                request.Senha, 
+                request.DataNascimento, 
                 true);
 
             await _usuarioRepository.CriarUsuarioAsync(novoUsuario);
