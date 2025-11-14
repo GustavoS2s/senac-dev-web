@@ -22,7 +22,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							@for (despesa of listaDespesas; track despesa.tipo === 'despesa'; let i = $index) {
+							@for (despesa of listaDespesas; track despesa.id; let i = $index) {
 							<tr>
 								<td>
 									<app-icon-avatar [icone]="despesa.icone" [cor]="despesa.cor"></app-icon-avatar>
@@ -34,7 +34,7 @@
 									<button type="button" class="btn btn-sm btn-outline-dark me-1" placement="top" ngbTooltip="Editar categoria">
 										<i class="ri-pencil-line"></i>
 									</button>
-									<button (click)="excluirCategoriaDespesa(despesa.id)" type="button" class="btn btn-sm btn-outline-danger" placement="top" ngbTooltip="Excluír categoria">
+									<button (click)="excluirCategoria(despesa.id)" type="button" class="btn btn-sm btn-outline-danger" placement="top" ngbTooltip="Excluír categoria">
 										<i class="ri-delete-bin-2-line"></i>
 									</button>
 								</td>
@@ -58,7 +58,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							@for (receita of listaReceitas; track receita.tipo === 'receita'; let i = $index) {
+							@for (receita of listaReceitas; track receita.id; let i = $index) {
 							<tr>
 								<td>
 									<app-icon-avatar [icone]="receita.icone" [cor]="receita.cor"></app-icon-avatar>
@@ -66,12 +66,13 @@
 								<td>{{ receita.nome }}</td>
 								<td>{{ receita.descricao }}</td>
 								<td><app-status-badge [status]="receita.ativo"></app-status-badge></td>
-								<td>
-									<button (click)="open(modalCategorias, receita)" type="button" class="btn btn-outline-dark me-1 btn-sm" placement="top" ngbTooltip="Editar categoria">
+								<td>								
+									<td>
+									<button (click)="open(modalCategorias, receita)" type="button" class="btn btn-sm btn-outline-dark me-1" placement="top" ngbTooltip="Editar categoria">
 										<i class="ri-pencil-line"></i>
 									</button>
-									<button (click)="excluirCategoriaDespesa(receita.id)" type="button" class="btn btn-outline-danger me-1 btn-sm" placement="top" ngbTooltip="Excluir receita">
-										<i class="ri-delete-bin-2-line me-1"></i>
+									<button (click)="excluirCategoria(receita.id)" type="button" class="btn btn-sm btn-outline-danger" placement="top" ngbTooltip="Excluír categoria">
+										<i class="ri-delete-bin-2-line"></i>
 									</button>
 								</td>
 							</tr>
@@ -88,8 +89,8 @@
 
 		<ng-template #modalCategorias let-modal>
 			<div class="modal-header">
-				<h4 class="modal-title" id="modal-basic-title"> 
-					{{editandoCategoria ? editarCategoria() : cadastrarCategoria()}}
+				<h4 class="modal-title" id="modal-basic-title">
+					{{ editandoCategoria? 'Editar categoria' : 'Nova categoria'}}
 				</h4>
 				<button type="button" class="btn-close" aria-label="Close"
 					(click)="modal.dismiss('Cross click')"></button>
@@ -116,7 +117,7 @@
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-outline-secondary"
-					(click)="cadastrarCategoria()">Salvar</button>
+					(click)="editandoCategoria ? editarCategoria() : cadastrarCategoria()">Salvar</button>
 			</div>
 		</ng-template>
 
