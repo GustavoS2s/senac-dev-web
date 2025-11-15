@@ -7,11 +7,14 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root',
 })
 export class CategoriaService {
-  private apiUrl = 'https://localhost:7160/Categoria';
+  private apiUrl = "https://localhost:7160/Categoria";
 
   private http = inject(HttpClient);
 
-  oberTodasPorUsuario() : Observable<CategoriaModel[]>
+  obterTodasPorUsuario(): Observable<CategoriaModel[]>
   {
-    return this.http.get<CategoriaModel[]>(`${this.apiUrl + '?Usuarioid= da3b9f4c-8e6a-4a4f-9e6b-1c2d3e4f5a6b'}
+      const result = this.http.get<CategoriaModel[]>(this.apiUrl + "?UsuarioId=da3b9f4c-8e6a-4a4f-9e6b-1c2d3e4f5a6b");
+      console.log(result);
+      return result;
   }
+}
